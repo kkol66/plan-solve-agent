@@ -41,8 +41,9 @@ def load_env(path: str) -> None:
             if not line or line.startswith("#") or "=" not in line:
                 continue
             key, value = line.split("=", 1)
-            if key.strip() not in os.environ:  # 仅当环境变量未设置时才写入
-                os.environ[key.strip()] = value.strip()
+            key = key.strip().replace("\ufeff", "")  # 去掉可能存在的 UTF-8 BOM
+            if key not in os.environ:  # 仅当环境变量未设置时才写入
+                os.environ[key] = value.strip()
 
 
 load_env(os.path.join(ROOT_DIR, ".env"))
