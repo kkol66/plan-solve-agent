@@ -1,0 +1,8 @@
+# 忽略本地密钥文件（绝不上传）
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
